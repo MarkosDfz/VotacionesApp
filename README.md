@@ -1,6 +1,6 @@
 # VotacionesApp
 
-Aplicación de votaciones estudiantiles realizada en **Xamarin Forms** para IOS y Android utilizando el patrón [MVVM](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93modelo_de_vista#:~:text=El%20patr%C3%B3n%20modelo%E2%80%93vista%E2%80%93modelo,la%20l%C3%B3gica%20de%20la%20aplicaci%C3%B3n.).
+Aplicación de votaciones estudiantiles realizada en **Xamarin Forms** para IOS y Android utilizando el patrón [MVVM](https://es.wikipedia.org/wiki/Modelo%E2%80%93vista%E2%80%93modelo_de_vista#:~:text=El%20patr%C3%B3n%20modelo%E2%80%93vista%E2%80%93modelo,la%20l%C3%B3gica%20de%20la%20aplicaci%C3%B3n.), se conecta a un api para obtener la información necesaria.
 
 **Funcionalidades**
 
@@ -10,6 +10,8 @@ Aplicación de votaciones estudiantiles realizada en **Xamarin Forms** para IOS 
  4. Votaciones
  5. Reportes
  6. Certificados de votación
+ 
+ **Resultado**
 
 | ![Dfz-Code](https://raw.githubusercontent.com/MarkosDfz/VotacionesApp/master/resources/votacionesApp.gif) | <img src="https://raw.githubusercontent.com/MarkosDfz/VotacionesApp/master/resources/1.png" height="520"/> |
 |--|--|
