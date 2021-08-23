@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.ProfilePage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                <ScrollView>
+                    <StackLayout
+                        Spacing="10"
+                        Padding="10,20,10,10">
+                        <ffimageloading:CachedImage
+	                        RetryCount= "3"
+	                        RetryDelay= "600"
+	                        WidthRequest="200"
+                            HeightRequest="200"
+	                        CacheDuration= "50"
+	                        DownsampleToViewSize = "true"
+	                        ErrorPlaceholder= "ErrorImage"
+                            Source="{Binding ImageSource}">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation BorderSize="0"/>
+                            </ffimageloading:CachedImage.Transformations>
+                            <ffimageloading:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding ChangeImageCommand}"/>
+                            </ffimageloading:CachedImage.GestureRecognizers>
+                        </ffimageloading:CachedImage>
+                        <Label
+                            FontSize="Micro"
+                            TextColor="#C00C3A"
+                            HorizontalTextAlignment="Center"
+                            Text="Presione 2 veces en la imagen si desea cambiarla"/>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                TextColor="Black"
+                                Text="Cédula:     *"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"/>
+                            <Entry
+                                TextColor="Gray"
+                                IsReadOnly="true"
+                                Placeholder="Cédula"
+                                Keyboard="Telephone"
+                                Text="{Binding User.Cedula}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                TextColor="Black"
+                                Text="Apellidos: *"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Start"/>
+                            <Entry
+                                TextColor="Gray"
+                                IsReadOnly="true"
+                                Placeholder="Apellidos"
+                                Text="{Binding User.LastName}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                TextColor="Black"
+                                Text="Nombres: *"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"/>
+                            <Entry
+                                TextColor="Gray"
+                                IsReadOnly="true"
+                                Placeholder="Nombres"
+                                Text="{Binding User.FirstName}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal">
+                            <Label
+                                TextColor="Black"
+                                Text="Curso:      *"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Center"/>
+                            <Entry
+                                TextColor="Gray"
+                                IsReadOnly="true"
+                                Placeholder="Curso"
+                                Text="{Binding User.Curso}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout
+                            Margin="0,30,0,0"
+                            Orientation="Vertical">
+                            <Button
+                                BorderRadius="20"
+                                TextColor="White"
+                                Text="Cambiar Contraseña"
+                                BackgroundColor="#0F347F"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                Command="{Binding ChangePasswordCommand}"/>
+                            <Button
+                                Text="Guardar"
+                                BorderRadius="20"
+                                TextColor="White"
+                                BackgroundColor="#C00C3A"
+                                VerticalOptions="Center"
+                                Command="{Binding SaveCommand}"
+                                HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

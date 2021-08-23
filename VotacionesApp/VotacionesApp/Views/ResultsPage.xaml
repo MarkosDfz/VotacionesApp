@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.ResultsPage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                <ScrollView>
+                    <StackLayout
+                        Padding="10">
+                        <SearchBar
+                            TextColor="Black"
+                            Placeholder="Buscar"
+                            Text="{Binding Filter}"
+                            PlaceholderColor="Black"
+                            CancelButtonColor="Black"
+                            BackgroundColor="Transparent">
+                            <SearchBar.Behaviors>
+                                <b:EventToCommandBehavior
+                                    EventName="TextChanged"
+                                    CommandParameter="{Binding Filter}"
+                                    Command="{Binding TextChangedCommand}"/>
+                            </SearchBar.Behaviors>
+                         </SearchBar>
+                        <ListView
+                            RowHeight="105"
+                            HasUnevenRows="True"
+                            SeparatorVisibility="None"
+                            BackgroundColor="Transparent"
+                            ItemsSource="{Binding Results}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame
+                                            Margin="0,0,0,8"
+                                            HasShadow="False"
+                                            CornerRadius="30"
+                                            BackgroundColor="#ededed">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="20"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    WidthRequest="60"
+                                                    HeightRequest="60"
+                                                    Source="results.png"
+                                                    VerticalOptions="Center"/>
+                                                <Label
+                                                    FontSize="18"
+                                                    Grid.Column="2"
+                                                    TextColor="Black"
+                                                    FontAttributes="Bold"
+                                                    VerticalOptions="Center"
+                                                    Text="{Binding Description}"/>
+                                            </Grid>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectResultCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

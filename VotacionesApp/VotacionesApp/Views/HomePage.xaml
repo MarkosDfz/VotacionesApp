@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="VotacionesApp.Views.HomePage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <Grid>
+                <Image
+                    Source="back.png"
+                    Aspect="AspectFill"/>
+                <ScrollView>
+                    <StackLayout
+                        Spacing="10"
+                        Padding="10,10,10,10">
+                        <StackLayout
+                            IsVisible="{Binding IsVisibleNoVoto}">
+                            <Image
+                                Margin="0,30,0,20"
+                                WidthRequest="350"
+                                HeightRequest="350"
+                                Source="novote.png"/>
+                            <Label
+                                FontSize="30"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="No tiene votaciones pendientes :)"/>
+                        </StackLayout>
+                        <StackLayout
+                            IsVisible="{Binding IsVisibleSiVoto}">
+                            <Image
+                                WidthRequest="370"
+                                HeightRequest="400"
+                                Source="votepending.png"/>
+                            <Label
+                                FontSize="25"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                Text="!Tiene votaciones pendientes!"/>
+                            <StackLayout
+                                Padding="30,20"
+                                Margin="50,0,50,0">
+                                <Button
+                                    Text="Votar"
+                                    FontSize="18"
+                                    BorderRadius="20"
+                                    TextColor="White"
+                                    VerticalOptions="Center"
+                                    BackgroundColor="#C00C3A"
+                                    Command="{Binding GoVoteCommand}"
+                                    HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

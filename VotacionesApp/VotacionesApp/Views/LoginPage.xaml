@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.LoginPage"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                <ScrollView>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image
+                                Grid.Row="0"
+                                Source="votetuto.png"
+                                HeightRequest="160"
+                                WidthRequest="150"
+                                Margin="0,30,0,30"/>
+                            <StackLayout
+                                Grid.Row="1"
+                                Padding="30,20">
+                                <Entry
+                                    Text="{Binding Cedula}"
+                                    PlaceholderColor="Black"
+                                    Placeholder="Número de Cédula"/>
+                                <Entry
+                                    IsPassword="True"
+                                    PlaceholderColor="Black"
+                                    Placeholder="Contraseña"
+                                    Text="{Binding Password}"/>
+                                <StackLayout
+                                    Orientation="Horizontal">
+                                    <Label
+                                        TextColor="Black"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Start"
+                                        Text="¿Recordar Usuario?"/>
+                                    <CheckBox
+                                        Color="#2E7DF6"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="EndAndExpand"
+                                        IsChecked="{Binding IsRemember}"/>
+                                </StackLayout>
+                                <StackLayout
+                                    Grid.Row="2"
+                                    Padding="30,20"
+                                    Margin="0,45,0,0">
+                                    <Button
+                                        TextColor="White"
+                                        BorderRadius="20"
+                                        Text="Iniciar Sesión"
+                                        VerticalOptions="Center"
+                                        BackgroundColor="#C00C3A"
+                                        Command="{Binding LoginCommand}"
+                                        HorizontalOptions="FillAndExpand"/>
+                                    <Button
+                                        Text="Tutorial"
+                                        TextColor="White"
+                                        BorderRadius="20"
+                                        VerticalOptions="Center"
+                                        BackgroundColor="#0F347F"
+                                        HorizontalOptions="FillAndExpand"
+                                        Command="{Binding TutorialCommand}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Grid>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

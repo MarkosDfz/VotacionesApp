@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="http://prismlibrary.com"
+                  xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                  xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="VotacionesApp.Views.VotingMasterDetailPage">
+
+    <MasterDetailPage.Master>
+        <ContentPage
+        	Title="Menú">
+            <StackLayout
+                Padding="20,40,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="5"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ffimageloading:CachedImage
+                        Grid.Column="0"
+	                    RetryCount= "3"
+	                    RetryDelay= "600"
+	                    WidthRequest="80"
+                        HeightRequest="80"
+	                    CacheDuration= "50"
+	                    ErrorPlaceholder= "ErrorImage"
+                        Source="{Binding PhotoFullPath}">
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation BorderSize="0"/>
+                    </ffimageloading:CachedImage.Transformations>
+                        <ffimageloading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="2" Command="{Binding ChangeImageCommand}"/>
+                        </ffimageloading:CachedImage.GestureRecognizers>
+                    </ffimageloading:CachedImage>
+                    <Label
+                        Grid.Column="2"
+                        TextColor="Black"
+                        Text="{Binding Name}"
+                        FontAttributes="Bold"
+                        VerticalOptions="Center"/>
+                </Grid>
+                <Label
+                    FontSize="30"
+                    Text="Opciones"
+                    TextColor="Black"
+                    Margin="0,10,0,0"
+                    FontAttributes="Bold"/>
+                <BoxView
+                    Color="Silver"
+                    HeightRequest="1"
+                    Margin="0,0,20,0"
+                    HorizontalOptions="FillAndExpand"/>
+                <ListView
+                	HasUnevenRows="True"
+                	SeparatorVisibility="None"
+                	ItemsSource="{Binding Menus}"
+                	BackgroundColor="Transparent">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectMenuCommand}"/>
+                                    </Grid.GestureRecognizers>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image
+                                    	Grid.Column="1"
+                                    	WidthRequest="50"
+                                    	HeightRequest="50"
+                                    	Source="{Binding Icon}"/>
+                                    <Label
+                                    	Grid.Column="2"
+                                        TextColor="Black"
+                                    	Text="{Binding Title}"
+                                    	VerticalOptions="Center"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label
+                    FontSize="13"
+                    TextColor="Black"
+                    Margin="0,0,0,13"
+                    FontAttributes="Bold"
+                    Text="© Votaciones Dfz-Code"/>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+</MasterDetailPage>

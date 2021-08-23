@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.VotingPage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                <ScrollView>
+                    <FlexLayout
+                        Padding="10"
+                        BindableLayout.ItemsSource="{Binding Voting.Candidates}"
+                        Direction="Row"
+                        Visual="Material"
+                        AlignContent="SpaceEvenly"
+                        JustifyContent="SpaceAround"
+                        Wrap="Wrap">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    HasShadow="True"
+                                    BackgroundColor="AntiqueWhite"
+                                    CornerRadius="84"
+                                    WidthRequest="134"
+                                    HeightRequest="168">
+                                    <Grid
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="10"/>
+                                            <RowDefinition Height="52"/>
+                                        </Grid.RowDefinitions>
+                                        <ffimageloading:CachedImage
+                                            Grid.Row="0"
+                                            HeightRequest="80"
+                                            WidthRequest="80"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            Source="{Binding User.PhotoFullPath}">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation BorderSize="0"/>
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="9"
+                                            WidthRequest="110"
+                                            VerticalOptions="Center"
+                                            FontAttributes="Bold"
+                                            TextColor="Black"
+                                            HorizontalTextAlignment="Center"
+                                            Text="{Binding User.Group}" />
+                                        <Label
+                                            Grid.Row="2"
+                                            VerticalOptions="Start"
+                                            HorizontalTextAlignment="Center"
+                                            FontSize="11"
+                                            TextColor="Black"
+                                            FontAttributes="Bold"
+                                            WidthRequest="110"
+                                            Text="{Binding User.FullName}" />
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="TapGestureRecognizer_Tapped"
+                                            CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                x:Name="grid"
+                IsVisible="false"
+                BackgroundColor="#ededed">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    IsVisible="false"
+                    x:Name="animation"
+                    Animation="loading.json"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

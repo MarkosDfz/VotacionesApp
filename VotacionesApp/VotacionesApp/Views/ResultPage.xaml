@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="VotacionesApp.Views.ResultPage"
+             BackgroundColor="#FC7862"
+             Title="{Binding Title}">
+   <ScrollView>
+        <Grid
+            BackgroundColor="White"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <BoxView
+                HeightRequest="300"
+                BackgroundColor="#FC7862"
+                VerticalOptions="StartAndExpand"/>
+            <StackLayout
+                Orientation="Vertical"
+                HorizontalOptions="Center">
+                <StackLayout
+                    HorizontalOptions="Center">
+                    <ffimageloading:CachedImage
+	                    RetryCount= "3"
+	                    RetryDelay= "600"
+	                    WidthRequest="120"
+                        HeightRequest="120"
+	                    CacheDuration= "50"
+                        VerticalOptions="Center"
+                        Source="{Binding Result.Winner.PhotoFullPath}">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation BorderSize="0"/>
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                </StackLayout>
+                <Label
+                    FontSize="17"
+                    TextColor="White"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Text="{Binding Result.Description}"/>
+                <Label
+                    FontSize="16"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Text="{Binding Result.Winner.FullName}"/>
+                <Label
+                    FontSize="14"
+                    TextColor="White"
+                    HorizontalOptions="Center"
+                    Text="{Binding Result.Winner.Group}"/>
+                <Label
+                    FontSize="12"
+                    TextColor="White"
+                    Text="CANDIDATO GANADOR"
+                    HorizontalOptions="Center"/>
+            </StackLayout>
+            <Frame
+                Grid.Row="1"
+                Padding="0"
+                HasShadow="True"
+                CornerRadius="10"
+                HeightRequest="140"
+                Margin="20,-80,20,0">
+                <Grid
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        FontSize="13"
+                        TextColor="Black"
+                        Grid.ColumnSpan="3"
+                        FontAttributes="Bold"
+                        Text="Datos Generales"
+                        HorizontalOptions="Center"/>
+                    <StackLayout
+                        Margin="0,13,0,0"
+                        Orientation="Vertical"
+                        HorizontalOptions="CenterAndExpand">
+                        <Image
+                            WidthRequest="40"
+                            Source="vote.png"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"/>
+                        <StackLayout
+                            Spacing="7"
+                            HorizontalOptions="CenterAndExpand">
+                            <Label
+                                Text="Total"
+                                FontSize="12"
+                                TextColor="Black"
+                                HorizontalOptions="Center"/>
+                            <Label
+                                FontSize="14"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="{Binding Result.QuantityVotes}"/>
+                            <Label
+                                Text="Votos"
+                                FontSize="11"
+                                TextColor="#7D7D7D"
+                                HorizontalOptions="Center"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Column="1"
+                        Margin="0,13,0,0"
+                        Orientation="Vertical"
+                        HorizontalOptions="CenterAndExpand">
+                        <Image
+                            Source="date.png"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"/>
+                        <StackLayout
+                            Spacing="7"
+                            HorizontalOptions="CenterAndExpand">
+                            <Label
+                                Text="Inició"
+                                FontSize="12"
+                                TextColor="Black"
+                                HorizontalOptions="Center"/>
+                            <Label
+                                FontSize="14"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"
+                                Text="{Binding Result.DateTimeStart, StringFormat='{0:dd/MM/yyyy}'}"/>
+                            <Label
+                                FontSize="11"
+                                TextColor="#7D7D7D"
+                                HorizontalOptions="Center"
+                                Text="{Binding Result.DateTimeStart, StringFormat='{0:HH:mm}'}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Column="2"
+                        Margin="0,13,0,0"
+                        Orientation="Vertical"
+                        HorizontalOptions="CenterAndExpand">
+                        <Image
+                            Source="date.png"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            HorizontalOptions="Center"/>
+                        <StackLayout
+                            Spacing="7"
+                            HorizontalOptions="CenterAndExpand">
+                            <Label
+                                FontSize="12"
+                                Text="Finalizó"
+                                TextColor="Black"
+                                HorizontalOptions="Center"/>
+                            <Label
+                                FontSize="14"
+                                TextColor="Black"
+                                FontAttributes="Bold"
+                                Text="{Binding Result.DateTimeEnd, StringFormat='{0:dd/MM/yyyy}'}"/>
+                            <Label
+                                FontSize="11"
+                                TextColor="#7D7D7D"
+                                HorizontalOptions="Center"
+                                Text="{Binding Result.DateTimeEnd, StringFormat='{0:HH:mm}'}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <chart:SfChart
+                Grid.Row="2"
+                Margin="6,0"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                <chart:SfChart.Series>
+                    <chart:PieSeries
+                        LegendIcon="Circle"
+                        EnableTooltip="True"
+                        ExplodeOnTouch="True"
+                        EnableAnimation="True"
+                        ShowMarkerAtLineEnd="True"
+                        XBindingPath="User.FullName"
+                        YBindingPath="QuantityVotes"
+                        ItemsSource="{Binding Candidates}"
+                        DataMarkerPosition="OutsideExtended">
+                        <chart:PieSeries.DataMarker>
+                            <chart:ChartDataMarker
+                                LabelContent="Percentage">
+                                <chart:ChartDataMarker.LabelStyle>
+                                    <chart:DataMarkerLabelStyle
+                                        Font="14"
+                                        LabelPosition="Center"/>
+                                </chart:ChartDataMarker.LabelStyle>
+                            </chart:ChartDataMarker>
+                        </chart:PieSeries.DataMarker>
+                        <chart:PieSeries.TooltipTemplate>
+                            <DataTemplate>
+                                <StackLayout
+                                    Orientation="Vertical">
+                                    <StackLayout
+                                        Orientation="Horizontal">
+                                        <Label
+                                            Text="Votos: "
+                                            TextColor="Black"
+                                            FontAttributes="Bold"/>
+                                        <Label
+                                            TextColor="Black"
+                                            Text="{Binding QuantityVotes}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </chart:PieSeries.TooltipTemplate>
+                        <chart:PieSeries.ColorModel>
+                            <chart:ChartColorModel Palette="Custom">
+                                <chart:ChartColorModel.CustomBrushes>
+                                    <Color>#429483</Color>
+                                    <Color>#B03A3C</Color>
+                                    <Color>#F9D84D</Color>
+                                    <Color>#465F7D</Color>
+                                    <Color>#FF7F25</Color>
+                                </chart:ChartColorModel.CustomBrushes>
+                            </chart:ChartColorModel>
+                        </chart:PieSeries.ColorModel>
+                    </chart:PieSeries>
+                </chart:SfChart.Series>
+		        <chart:SfChart.Legend>
+                <chart:ChartLegend
+                    IconWidth="15"
+                    MaxWidth="1350"
+                    IconHeight="15"
+                    DockPosition="Top"
+                    OverflowMode="Wrap"
+                    IsIconVisible="True"
+                    Orientation="Vertical">
+                    <chart:ChartLegend.Title>
+                        <chart:ChartTitle
+                            FontSize="14"
+                            Text="Candidatos"
+                            TextColor="Black"
+                            TextAlignment="Center"
+                            FontAttributes="Bold"/>
+                    </chart:ChartLegend.Title>
+                    <chart:ChartLegend.LabelStyle>
+                        <chart:ChartLegendLabelStyle
+                            FontSize="16"
+                            TextColor="Black"/>
+                    </chart:ChartLegend.LabelStyle>
+                </chart:ChartLegend>
+            </chart:SfChart.Legend>
+                <chart:SfChart.ChartBehaviors>
+	                <chart:ChartTooltipBehavior
+                        BackgroundColor="AntiqueWhite"
+                        TextColor="Black"
+                        Margin="5"
+                        Duration="10"
+                        FontSize="15"/>
+                </chart:SfChart.ChartBehaviors>
+            </chart:SfChart>
+        </Grid>
+    </ScrollView>
+</ContentPage>

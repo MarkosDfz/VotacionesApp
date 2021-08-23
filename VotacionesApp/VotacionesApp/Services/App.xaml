@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+             x:Class="VotacionesApp.App">
+	<Application.Resources>
+
+		<ResourceDictionary>
+
+        	<!-- Parameters -->
+        	<x:String x:Key="UrlAPI">AQUI LA URL DEL API</x:String>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#FC7862"/>
+                <Setter Property="BarTextColor" Value="Black"/>
+            </Style>
+    	</ResourceDictionary>
+
+	</Application.Resources>
+</prism:PrismApplication>

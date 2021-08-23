@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.CertificatesPage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                 <StackLayout
+                     IsVisible="{Binding IsVisible}">
+                    <Image
+                        Margin="0,80,0,20"
+                        WidthRequest="170"
+                        HeightRequest="170"
+                        Source="nocertificate.png"/>
+                    <Label
+                        FontSize="26"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Actualmente usted"/>
+                     <Label
+                        FontSize="26"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="no posee ningún certificado"/>
+                     <Label
+                        FontSize="26"
+                        TextColor="Black"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="de votación"/>
+                </StackLayout>
+                <ScrollView>
+                    <FlexLayout
+                        Wrap="Wrap"
+                        Padding="10"
+                        Direction="Row"
+                        AlignContent="SpaceEvenly"
+                        JustifyContent="SpaceAround"
+                        BindableLayout.ItemsSource="{Binding Certificados}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    HasShadow="True"
+                                    CornerRadius="80"
+                                    WidthRequest="126"
+                                    HeightRequest="160"
+                                    BackgroundColor="AntiqueWhite">
+                                    <Grid
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Image
+                                            Grid.Row="0"
+                                            WidthRequest="80"
+                                            HeightRequest="80"
+                                            Source="certificate.png"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"/>
+                                        <Label
+                                            Grid.Row="1"
+                                            FontSize="11"
+                                            TextColor="Black"
+                                            WidthRequest="110"
+                                            FontAttributes="Bold"
+                                            VerticalOptions="Center"
+                                            Text="{Binding Description}"
+                                            HorizontalTextAlignment="Center"/>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Command="{Binding SelectCertificateCommand}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>

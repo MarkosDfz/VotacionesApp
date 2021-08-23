@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="VotacionesApp.Views.VotingsPage"
+             BackgroundColor="White"
+             Title="{Binding Title}">
+
+    <AbsoluteLayout>
+        <Grid
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0,0,1,1">
+             <Grid>
+                 <Image
+                     Source="back.png"
+                     Aspect="AspectFill"/>
+                <ScrollView>
+                    <StackLayout
+                        Padding="10">
+                        <ListView
+                            HasUnevenRows="True"
+                            SeparatorVisibility="None"
+                            BackgroundColor="Transparent"
+                            ItemsSource="{Binding Votings}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Frame
+                                            Margin="0,0,0,8"
+                                            HasShadow="False"
+                                            CornerRadius="40"
+                                            BackgroundColor="#ededed">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="10"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    WidthRequest="60"
+                                                    HeightRequest="60"
+                                                    Source="voting.png"
+                                                    VerticalOptions="Center"/>
+                                                <StackLayout
+                                                    Grid.Column="2">
+                                                    <Label
+                                                        FontSize="15"
+                                                        TextColor="Black"
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Description}"/>
+                                                    <Label
+                                                        FontSize="14"
+                                                        TextColor="Black"
+                                                        Text="{Binding Remarks}"/>
+                                                    <StackLayout
+                                                        Orientation="Horizontal">
+                                                        <Label
+                                                            FontSize="12"
+                                                            Text="Empieza:"
+                                                            TextColor="Black"
+                                                            FontAttributes="Bold"/>
+                                                        <Label
+                                                            FontSize="12"
+                                                            TextColor="Black"
+                                                            Text="{Binding DateTimeStart, StringFormat='{0:dd/MM/yyyy HH:mm}'}"/>
+                                                    </StackLayout>
+                                                    <StackLayout
+                                                        Orientation="Horizontal">
+                                                        <Label
+                                                            FontSize="12"
+                                                            Text="Termina: "
+                                                            TextColor="Black"
+                                                            FontAttributes="Bold"/>
+                                                        <Label
+                                                            FontSize="12"
+                                                            TextColor="Black"
+                                                            Text="{Binding DateTimeEnd, StringFormat='{0:dd/MM/yyyy HH:mm}'}"/>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectVotingCommand}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <Grid
+                Opacity=".9"
+                BackgroundColor="#ededed"
+                IsVisible="{Binding IsRunning}">
+                <forms:AnimationView
+                    Loop="true"
+                    Scale=".3"
+                    AutoPlay="true"
+                    Animation="loading.json"
+                    IsVisible="{Binding IsRunning}"
+                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"/>
+            </Grid>
+        </Grid>
+    </AbsoluteLayout>
+</ContentPage>
